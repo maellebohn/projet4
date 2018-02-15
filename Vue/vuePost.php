@@ -1,0 +1,65 @@
+<?php ob_start(); ?>
+<div class="wrap-post">
+  <div class="header-post text-center">
+    <div class="title-post"><h3><?php $post['title'] ?></h3>
+    <div class=info-post>Publié le <?php $post['date_creation'] ?></div>
+    </div>
+  </div>
+  <div class="content-post">
+    <div class="content"><?php $post['content'] ?></div>
+  </div>
+</div>
+
+<div  class="text-center"><span id="icone" class="fas fa-user-secret"></span></div>
+
+<div class="comments wrap-post">
+  <div class="header-post">
+    <div class="title-post"><h3>Vos avis et commentaires</h3></div>
+  </div>
+  <hr>
+  <div id="listComment">
+  <?php foreach ($comments as $comment): ?>
+  	<div class="content-post">
+      <p><?php $comment['content'] ?></p>
+      <div class="pull-right">
+        <p>Par <?php $comment['author'] ?> le <?php $comment['date_publication'] ?></p>
+  	  </div>
+      <p><a id="signalement">Signaler ce commentaire</a></p>
+  	</div>
+    <hr>
+  <?php endforeach; ?>
+  </div>
+</div>
+
+<div  class="text-center"><span id="icone" class="fas fa-user-secret"></span></div>
+
+<div>
+  <h4> Ajouter votre avis ou commentaire</h4>
+	<form method="POST" action="index.php?action=commenter">
+
+		<div class="form-group">
+			<input id="auteur" class="form-control" name="auteur" type="text" placeholder="Votre nom" required />
+		</div>
+
+    <div class="form-group">
+			<input id="mail" class="form-control" name="email" type="text" placeholder="Votre email" required />
+		</div>
+
+		<div class="form-group">
+			<textarea id="txtCommentaire" class="form-control" name="contenu" rows="4" placeholder="Votre commentaire" required></textarea>
+		</div>
+
+		<div class="form-group">
+			<input type="hidden" name="id" value="<?php $post['id'] ?>" />
+		</div>
+
+		<div class="form-group">
+			<input type="submit" class="btn btn-primary" value="Commenter" />
+		</div>
+
+	</form>
+</div>
+
+<?php $contenu = ob_get_clean(); ?>
+
+<?php require 'template.php'; ?>
