@@ -18,8 +18,14 @@ function post($idPost) {
 
 //Affiche un nouveau commentaire à un post
 function commenter($author, $content, $email, $idPost) {
-  $comments = addcomment($author, $content, $email, $idPost);
+  $comments = addComment($author, $content, $email, $idPost);
   header('Location: /index.php?action=post&id='.$_POST['id'].'');
+  require 'Vue/vuePost.php';
+}
+
+//Affichage de la page d'un post après signalement d'un commentaire
+function signalement($idComment) {
+  signal($idComment);
   require 'Vue/vuePost.php';
 }
 
@@ -29,6 +35,8 @@ function connexion() {
 }
 
 function administration() {
+  $posts = getPosts();
+  $comments = comments();
   require 'Administration/vueAdmin.php';
 }
 
@@ -43,6 +51,44 @@ function deconnexion() {
   session_destroy();
   unset($_SESSION);
   require 'Administration/connexion.php';
+}
+
+//Affiche la page d'administration après ajout d'un post
+function poster($title, $content, $author) {
+  $posts= addPost($title, $content, $author);
+  header('Location: /index.php?action=connect');
+  require 'Administration/vueAdmin.php';
+}
+
+//Affiche la page d'administration après suppression d'un post
+function supprimer($idPost) {
+  deletePost($idPost);
+  header('Location: /index.php?action=connect');
+  require 'Administration/vueAdmin.php';
+}
+
+//Affiche la page d'administration après suppression d'un commentaire
+function supprimerComment($idComment) {
+  deleteComment($idComment);
+  header('Location: /index.php?action=connect');
+  require 'Administration/vueAdmin.php';
+}
+
+//Affiche la page d'administration après modification d'un post
+function modifier($title,$content,$idPost) {
+  modifyPost($title, $content, $idPost);
+  header('Location: /index.php?action=connect');
+  require 'Administration/vueAdmin.php';
+}
+
+// Affiche la page de redaction après clic sur le bouton modifier
+function recup($idPost){
+  $post = getPost($idPost);
+  $title=$post['title'];
+  $content=$post['content'];
+  $username=$post['username'];
+  $id=$post['id'];
+  require 'Administration/vueRedaction.php';
 }
 
 // Affiche une erreur

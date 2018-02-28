@@ -1,12 +1,12 @@
 <?php ob_start(); ?>
 <div class="wrap-post">
   <div class="header-post text-center">
-    <div class="title-post"><h3><?php $post['title'] ?></h3>
-    <div class=info-post>Publié le <?php $post['date_creation'] ?></div>
+    <div class="title-post"><h3><?= $post['title'] ?></h3>
+    <div class=info-post>Publié le <?= $post['date_creation'] ?></div>
     </div>
   </div>
   <div class="content-post">
-    <div class="content"><?php $post['content'] ?></div>
+    <div class="content"><?= $post['content'] ?></div>
   </div>
 </div>
 
@@ -20,11 +20,11 @@
   <div id="listComment">
   <?php foreach ($comments as $comment): ?>
   	<div class="content-post">
-      <p><?php $comment['content'] ?></p>
+      <p><?= $comment['content'] ?></p>
       <div class="pull-right">
-        <p>Par <?php $comment['author'] ?> le <?php $comment['date_publication'] ?></p>
+        <p>Par <?= $comment['author'] ?> le <?= $comment['date_publication'] ?></p>
   	  </div>
-      <p><a id="signalement">Signaler ce commentaire</a></p>
+      <p><a id="signalement" href="<?= "index.php?action=signaler&id=".$comment['id'] ?>">Signaler ce commentaire</a></p>
   	</div>
     <hr>
   <?php endforeach; ?>
@@ -50,7 +50,7 @@
 		</div>
 
 		<div class="form-group">
-			<input type="hidden" name="id" value="<?php $post['id'] ?>" />
+			<input type="hidden" name="id" value="<?= $post['id'] ?>" />
 		</div>
 
 		<div class="form-group">

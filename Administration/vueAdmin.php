@@ -22,10 +22,10 @@
         <tbody>
         <?php foreach ($posts as $post): ?>
           <tr>
-            <td><?php $post['title']?></td>
-            <td><?php $post['content']?></td>
-            <td><?php $post['date_creation']?></td>
-            <td><a href="#"><span class="fas fa-edit"></span></a><a href="#"></a><a href="#"><spanclass="fas fa-times"></span></a></td>
+            <td><?= $post['title'] ?></td>
+            <td><?= $post['content']?></td>
+            <td><?= $post['date_creation']?></td>
+            <td><?= '<a href="/index.php?action=modifier&id='.$post['id'].'">'; ?> <span class="fas fa-edit"></span></a><?= '<a href="/index.php?action=supprimer&id='.$post['id'].'">'; ?> <span class="fas fa-times"></span></a></td>
           </tr>
         <?php endforeach; ?>
         </tbody>
@@ -36,7 +36,6 @@
       <table id="tab2-dt" class="table table-striped table-bordered table-condensed">
         <thead>
           <tr>
-            <th>Chapitre</th>
             <th>Contenu</th>
             <th>Auteur</th>
             <th>Email</th>
@@ -47,12 +46,11 @@
         <tbody>
         <?php foreach ($comments as $comment): ?>
           <tr>
-            <td><?php $comment['post']?></td>
-            <td><?php $comment['content']?></td>
-            <td><?php $comment['author']?></td>
-            <td><?php $comment['email']?></td>
-            <td><?php $comment['date_publication']?></td>
-            <td><a href="#"><span class="fas fa-times"></span></a></td>
+            <td><?= $comment['content']?></td>
+            <td><?= $comment['author']?></td>
+            <td><?= $comment['email']?></td>
+            <td><?= $comment['date_publication']?></td>
+            <td><?= '<a href="/index.php?action=delete&id='.$comment['id'].'">'; ?> <span class="fas fa-times"></span></a><?php if ($comment['signalement']==1) {echo'Signalé';}?></td>
           </tr>
         <?php endforeach; ?>
         </tbody>

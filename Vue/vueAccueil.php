@@ -11,13 +11,13 @@
 <?php foreach ($posts as $post): ?>
   <div class="wrap-post text-center">
     <div class="header-post">
-      <div class="title-post"><h3><?php $post['title'] ?></h3>
-      <div class=info-post>Publié le <?php $post['date_creation'] ?></div>
+      <div class="title-post"><h3><?= $post['title'] ?></h3>
+      <div class=info-post>Publié le <?= $post['date_creation'] ?></div>
       </div>
     </div>
     <div class="content-post">
-      <div class="content"><?php substr($post['content'],0,225) ?>...</div>
-      <div class="fade-content"><a href="<?php "index.php?action=post&id=" . $post['id'] ?>">Lire la suite</a></div>
+      <div class="content"><?= substr($post['content'],0,225) ?>...</div>
+      <div class="fade-content"><a href="<?= "index.php?action=post&id=". $post['id'] ?>">Lire la suite</a></div>
     </div>
   </div>
 

@@ -16,30 +16,72 @@ try {
             else
                 throw new Exception("Identifiant de post non défini");
         }
-        else if ($_GET['action'] == 'commenter') {
-          $author=$_POST['auteur'];
-          $content=nl2br($_POST['contenu']);
-          $email=$_POST['email'];
+        elseif ($_GET['action'] == 'commenter') {
+          $author=htmlspecialchars($_POST['auteur']);
+          $content=htmlspecialchars(nl2br($_POST['contenu']));
+          $email=htmlspecialchars($_POST['email']);
           $idPost= $_POST['id'];
           commenter($author, $content, $email, $idPost);
         }
-        else if ($_GET['action'] == 'login') {
+        elseif ($_GET['action'] == 'login') {
           connexion();
         }
-        else if ($_GET['action'] == 'connect') {
+        elseif ($_GET['action'] == 'signaler') {
+          $idComment= intval($_GET['id']);
+          signalement($idComment);
+        }
+        elseif ($_GET['action'] == 'connect') {
           if (!empty($_SESSION['username'])){
             administration();
           }
           else connexion();
         }
-        else if ($_GET['action'] == 'redaction') {
+        elseif ($_GET['action'] == 'redaction') {
           if (!empty($_SESSION['username'])){
             redaction();
           }
           else connexion();
         }
-        else if ($_GET['action'] == 'deconnect') {
+        elseif ($_GET['action'] == 'deconnect') {
           deconnexion();
+        }
+        elseif ($_GET['action'] == 'creer') {
+          if (!empty($_SESSION['username'])){
+            if (empty($_POST['id'])){
+              $title=htmlspecialchars($_POST['title']);
+              $content=nl2br($_POST['content']);
+              $author=htmlspecialchars($_POST['author']);
+              poster($title, $content, $author);
+            }
+            else {
+              $title=htmlspecialchars($_POST['title']);
+              $content=nl2br($_POST['content']);
+              $idPost=$_POST['id'];
+              modifier($title,$content,$idPost);
+            }
+          }
+          else connexion();
+        }
+        elseif ($_GET['action'] == 'supprimer') {
+          if (!empty($_SESSION['username'])){
+            $idPost = intval($_GET['id']);
+            supprimer($idPost);
+          }
+          else connexion();
+        }
+        elseif ($_GET['action'] == 'delete') {
+          if (!empty($_SESSION['username'])){
+            $idComment = intval($_GET['id']);
+            supprimerComment($idComment);
+          }
+          else connexion();
+        }
+        elseif ($_GET['action'] == 'modifier') {
+          if (!empty($_SESSION['username'])){
+            $idPost = intval($_GET['id']);
+            recup($idPost);
+          }
+          else connexion();
         }
         else
             throw new Exception("Action non valide");
