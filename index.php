@@ -36,6 +36,12 @@ try {
           }
           else connexion();
         }
+        elseif ($_GET['action'] == 'modifyUser') {
+          if (!empty($_SESSION['username'])){
+            modifyUser();
+          }
+          else connexion();
+        }
         elseif ($_GET['action'] == 'redaction') {
           if (!empty($_SESSION['username'])){
             redaction();

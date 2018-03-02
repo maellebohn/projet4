@@ -110,7 +110,7 @@ a.btn.btn-primary:hover
   background-color:black;
 }
 
-#password, #username
+#password, #username, #old-password, #new-password
 {
   width:50%;
 }

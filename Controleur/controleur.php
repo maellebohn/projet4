@@ -82,13 +82,17 @@ function modifier($title,$content,$idPost) {
 }
 
 // Affiche la page de redaction après clic sur le bouton modifier
-function recup($idPost){
+function recup($idPost) {
   $post = getPost($idPost);
   $title=$post['title'];
   $content=$post['content'];
   $username=$post['username'];
   $id=$post['id'];
   require 'Administration/vueRedaction.php';
+}
+
+function modifyUser() {
+  require 'Administration/modifyPassword.php';
 }
 
 // Affiche une erreur

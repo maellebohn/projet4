@@ -2,15 +2,15 @@
 // Renvoie la liste des posts du blog
 function getPosts() {
   // $bdd = getBdd();
-  $posts = getBdd()->query("select id, date_format(date_creation, '%d/%m/%Y') as date_creation, title, content from post order by id DESC");
-  return $posts;
+  return $posts = getBdd()->query("select id, date_format(date_creation, '%d/%m/%Y') as date_creation, title, content from post order by id DESC");
+  // return $posts;
 }
 
 // Renvoie la liste des 4 derniers posts du blog
 function getLastPosts() {
   // $bdd = getBdd();
-  $lastposts = getBdd()->query("select id,date_format(date_creation, '%d/%m/%Y') as date_creation, title from post order by date_creation DESC limit 4");
-  return $lastposts;
+  return $lastposts = getBdd()->query("select id,date_format(date_creation, '%d/%m/%Y') as date_creation, title from post order by date_creation DESC limit 4");
+  // return $lastposts;
 }
 
 // Renvoie les informations sur un post
@@ -53,8 +53,8 @@ function connect($username) {
   // $bdd = getBdd();
   $connect = getBdd()->prepare('select password, id from adminUser where username=:username;');
   $connect->execute(array(":username"=>$username));
-  $result=$connect->fetch();
-  return $result;
+  return $result=$connect->fetch();
+  // return $result;
 }
 
 //Ajoute un post dans la table
@@ -84,8 +84,8 @@ function deletePost($idPost) {
 // Renvoie la liste des commentaires du blog
 function comments() {
   // $bdd = getBdd();
-  $comments = getBdd()->query("select id, author, content, date_format(date_publication, '%d/%m/%Y') as date_publication, email, post, signalement from comment order by id DESC");
-  return $comments;
+  return $comments = getBdd()->query("select id, author, content, date_format(date_publication, '%d/%m/%Y') as date_publication, email, post, signalement from comment order by id DESC");
+  // return $comments;
 }
 
 //Suppression d'un commentaire dans la table
@@ -96,10 +96,17 @@ function deleteComment($idComment) {
   // return $comments->fetch();
 }
 
+//Mise à jour de la table après modification du mot de passe
+function modifyPassword($newpassword, $username) {
+  // $bdd = getBdd();
+  $modifyPassword = getBdd()->prepare('update adminUser set password=:password where username=:username;');
+  $modifyPassword->execute(array(":password"=>$newpassword, ":username"=> $username));
+}
+
 // Effectue la connexion à la BDD
 // Instancie et renvoie l'objet PDO associé
 function getBdd() {
-  $bdd = new PDO('mysql:host=localhost;dbname=projet4;charset=utf8', 'jean','Louise@13', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+  return $bdd = new PDO('mysql:host=localhost;dbname=projet4;charset=utf8', 'jean','Louise@13', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
   // ,PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC)
-  return $bdd;
+  // return $bdd;
 }
