@@ -1,4 +1,3 @@
-<?php ob_start(); ?>
 <div class="row">
   <h2 class="text-center" id="titre_presentation">Bienvenue sur mon blog pour découvrir mon dernier roman !</h2>
   <p>Il représente l'aboutissement de 2 ans de travail acharné, que je publierai ici au fur et à mesure de l'écriture pour obtenir votre avis en avant-première !</br>
@@ -17,13 +16,10 @@
     </div>
     <div class="content-post">
       <div class="content"><?= substr($post['content'],0,225) ?>...</div>
-      <div class="fade-content"><a href="<?= "index.php?action=post&id=". $post['id'] ?>">Lire la suite</a></div>
+      <div class="fade-content"><a href="<?= "index.php?action=post&id=" . $post['id'] ?>">Lire la suite</a></div>
     </div>
   </div>
 
   <div  class="text-center"><span id="icone" class="fas fa-user-secret"></span></div>
 
 <?php endforeach; ?>
-<?php $contenu = ob_get_clean(); ?>
-
-<?php require 'template.php'; ?>

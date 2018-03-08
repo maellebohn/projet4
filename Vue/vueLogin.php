@@ -1,5 +1,3 @@
-<?php ob_start(); ?>
-
 <div>
   <h1>Se connecter</h1>
 	<form method="POST">
@@ -22,7 +20,3 @@
 <?php if ($message==true) {
 echo '<div class="error">Nom d\'utilisateur ou mot de passe erroné</div>';
 } ?>
-
-<?php $contenu = ob_get_clean(); ?>
-
-<?php require 'template2.php'; ?>

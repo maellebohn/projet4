@@ -12,6 +12,7 @@ body
   background: url('images/police.jpg') no-repeat;
   background-size: cover;
   height:100%;
+  background-attachment: fixed;
 }
 
 html
@@ -110,7 +111,7 @@ a.btn.btn-primary:hover
   background-color:black;
 }
 
-#password, #username, #old-password, #new-password
+#password, #username, #new-password
 {
   width:50%;
 }

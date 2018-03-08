@@ -47,6 +47,7 @@
 								<ul class="dropdown-menu">
 									<li><a href="/index.php?action=connect">Administration</a></li>
 									<li><a href="/index.php?action=redaction">Rédaction</a></li>
+									<li><a href="/index.php?action=modifyUser">Profil</a></li>
 									<li><a href="/index.php?action=deconnect">Déconnexion</a></li>
 								</ul>
 							</li>

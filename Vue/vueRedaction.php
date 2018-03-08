@@ -1,5 +1,3 @@
-<?php ob_start(); ?>
-
 <h1>Rédaction ou modification d'un chapitre :</h1>
 
 <form method="POST" action="index.php?action=creer">
@@ -21,7 +19,7 @@
 <div class="form-group">
   <label class="control-label" for="text">Texte</label>
   <div class="">
-    <textarea id="content" name="content" required><?php if(isset($content)){echo $content;}?></textarea>
+    <textarea id="content" name="content" <?php if(isset($content)){echo "value='".$content."'";}?> required></textarea>
   </div>
 </div>
 
@@ -35,7 +33,3 @@
 </div>
 
 </form>
-
-<?php $contenu = ob_get_clean(); ?>
-
-<?php require '/var/www/html/Vue/template2.php'; ?>

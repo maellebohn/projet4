@@ -1,5 +1,3 @@
-<?php ob_start(); ?>
-
 <div>
   <h1>Changer votre mot de passe :</h1>
 	<form method="POST">
@@ -26,7 +24,3 @@
 <?php if ($message==true) {
 echo '<div class="error">Nom d\'utilisateur ou mot de passe erroné</div>';
 } ?>
-
-<?php $contenu = ob_get_clean(); ?>
-
-<?php require '/var/www/html/Vue/template2.php'; ?>

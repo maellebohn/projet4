@@ -11,8 +11,8 @@ body
 {
   background: url('images/police.jpg') no-repeat;
   background-size: cover;
-  background-attachment: fixed;
   height:100%;
+  background-attachment: fixed;
 }
 
 html

@@ -1,4 +1,3 @@
-<?php ob_start(); ?>
 <div class="wrap-post">
   <div class="header-post text-center">
     <div class="title-post"><h3><?= $post['title'] ?></h3>
@@ -59,7 +58,3 @@
 
 	</form>
 </div>
-
-<?php $contenu = ob_get_clean(); ?>
-
-<?php require 'template.php'; ?>

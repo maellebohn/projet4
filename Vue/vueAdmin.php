@@ -1,5 +1,3 @@
-<?php ob_start();?>
-
   <h1>Administration</h1>
 
   <ul class="nav nav-tabs">
@@ -22,7 +20,7 @@
         <tbody>
         <?php foreach ($posts as $post): ?>
           <tr>
-            <td><?= $post['title'] ?></td>
+            <td><?= $post['title']?></td>
             <td><?= $post['content']?></td>
             <td><?= $post['date_creation']?></td>
             <td><?= '<a href="/index.php?action=modifier&id='.$post['id'].'">'; ?> <span class="fas fa-edit"></span></a><?= '<a href="/index.php?action=supprimer&id='.$post['id'].'">'; ?> <span class="fas fa-times"></span></a></td>
@@ -62,7 +60,3 @@
 <div>
   <a class="btn btn-primary" href="/index.php?action=redaction"><span class="fas fa-plus"></span>Créer un nouveau chapitre</a>
 </div>
-
-<?php $contenu = ob_get_clean(); ?>
-
-<?php require '/var/www/html/Vue/template2.php'; ?>
