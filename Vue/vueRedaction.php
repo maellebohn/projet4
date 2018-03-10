@@ -1,6 +1,6 @@
 <h1>Rédaction ou modification d'un chapitre :</h1>
 
-<form method="POST" action="index.php?action=creer">
+<form method="POST" action="index.php?action=creer" novalidate>
 
 <div class="form-group">
   <label class="control-label" for="title">Titre</label>
@@ -12,14 +12,14 @@
 <div class="form-group">
   <label class="control-label" for="author">Auteur</label>
   <div class="">
-    <input id="title" class="form-control" name="author" type="text" placeholder="Jean Forteroche" <?php if(isset($username)){echo "value='".$username."'";}?> required/>
+    <input id="title" class="form-control" name="username" type="text" placeholder="Jean Forteroche" <?php if(isset($username)){echo "value='".$username."'";}?> required/>
   </div>
 </div>
 
 <div class="form-group">
   <label class="control-label" for="text">Texte</label>
   <div class="">
-    <textarea id="content" name="content" <?php if(isset($content)){echo "value='".$content."'";}?> required></textarea>
+    <textarea id="content" name="content" required><?php if(isset($content)){echo $content;}?></textarea>
   </div>
 </div>
 

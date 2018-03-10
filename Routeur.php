@@ -17,12 +17,12 @@ class Routeur {
   private $ctrlAdmin;
   private $ctrlRedaction;
 
-  public function __construct() {
-    $this->ctrlAccueil = new controleurAccueil();
-    $this->ctrlPost = new controleurPost();
-    $this->ctrlAdmin = new controleurAdmin();
-    $this->ctrlUser = new controleurUser();
-    $this->ctrlRedaction = new controleurRedaction();
+  public function __construct(array $database) {
+    $this->ctrlAccueil = new controleurAccueil($database);
+    $this->ctrlPost = new controleurPost($database);
+    $this->ctrlAdmin = new controleurAdmin($database);
+    $this->ctrlUser = new controleurUser($database);
+    $this->ctrlRedaction = new controleurRedaction($database);
   }
 
   // Route une requête entrante : exécution l'action associée
@@ -45,13 +45,14 @@ class Routeur {
           $this->ctrlPost->commenter($author, $content, $email, $idPost);
         }
         elseif ($_GET['action'] == 'signaler') {
-          $idComment= intval($this->getParametre($_GET,'id'));
-          $this->ctrlPost->signalement($idComment);
+          $idComment = intval($this->getParametre($_GET,'id'));
+          $idPost = intval($this->getParametre($_GET,'post'));
+          $this->ctrlPost->signalement($idComment, $idPost);
         }
         elseif ($_GET['action'] == 'login') {
           if(!empty($_POST["username"]) && !empty($_POST["password"])){
-            $username=$this->getParametre($_POST,'username');
-            $password=$this->getParametre($_POST,'password');
+            $username = htmlspecialchars($this->getParametre($_POST,'username'));
+            $password = htmlspecialchars($this->getParametre($_POST,'password'));
             $this->ctrlUser->connexion($username, $password);
           }else{
             $this->ctrlUser->connexion();
@@ -68,9 +69,9 @@ class Routeur {
         elseif ($_GET['action'] == 'modifyUser') {
           if (!empty($_SESSION['username'])){
             if (!empty($_POST["username"]) && !empty($_POST["password"]) && !empty($_POST["new-password"])){
-              $username=$this->getParametre($_POST,'username');
-              $password=$this->getParametre($_POST,'password');
-              $new_password=$this->getParametre($_POST,'new-password');
+              $username=htmlspecialchars($this->getParametre($_POST,'username'));
+              $password=htmlspecialchars($this->getParametre($_POST,'password'));
+              $new_password=htmlspecialchars($this->getParametre($_POST,'new-password'));
               $this->ctrlUser->modifyUser($username, $password, $new_password);
             }
             else {
@@ -96,12 +97,13 @@ class Routeur {
           if (!empty($_SESSION['username'])){
             if (empty($_POST['id'])){
               $title=htmlspecialchars($this->getParametre($_POST,'title'));
-              $content=htmlspecialchars(nl2br($this->getParametre($_POST,'content')));
+              $content=nl2br($this->getParametre($_POST,'content'));
+              var_dump($title);
               $this->ctrlRedaction->poster($title, $content, $_SESSION["id"]);
             }
             else {
               $title=htmlspecialchars($this->getParametre($_POST,'title'));
-              $content=htmlspecialchars(nl2br($this->getParametre($_POST,'content')));
+              $content=nl2br($this->getParametre($_POST,'content'));
               $idPost=$this->getParametre($_POST,'id');
               $this->ctrlRedaction->modifier($title,$content,$idPost);
             }

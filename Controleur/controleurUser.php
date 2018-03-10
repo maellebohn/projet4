@@ -13,9 +13,9 @@ class ControleurUser {
   private $manager;
   private $ctrlAdmin;
 
-  public function __construct() {
-    $this->manager=new AdminManager();
-    $this-> ctrlAdmin=new ControleurAdmin();
+  public function __construct(array $database) {
+    $this->manager=new AdminManager($database);
+    $this-> ctrlAdmin=new ControleurAdmin($database);
   }
 
   public function connexion(string $username = null,string $password = null) {
@@ -27,7 +27,6 @@ class ControleurUser {
       $this->password = htmlspecialchars($password);
 
       $result=$this->manager->connect($this->username);
-
       $isValid = $this->verification($result[0]);
       $this->setSession($isValid,$result);
     }
@@ -37,7 +36,7 @@ class ControleurUser {
     return password_verify($this->password, $passwordresult);
   }
 
-  private function setSession(bool $isValid,$result) {
+  private function setSession(bool $isValid, $result) {
     if ($isValid) {
       $_SESSION['username'] = $this->username;
       $_SESSION['id'] = $result[1];
@@ -60,12 +59,12 @@ class ControleurUser {
       $this->password = htmlspecialchars($password);
       $this->new_password = htmlspecialchars($new_password);
 
-      $result=$this->manager->connect($this->$username);
+      $result=$this->manager->connect($this->username);
       $isValid = $this->verification($result[0]);
 
       if ($isValid) {
-        $newpassword = password_hash("$this->$new_password", PASSWORD_DEFAULT);
-        modifyPassword($newpassword, $this->username);
+        $newpassword = password_hash("$this->new_password", PASSWORD_DEFAULT);
+        $this->manager->modifyPassword($newpassword, $this->username);
         $this->ctrlAdmin->administration();
       } else {
         // Autrement => message d'erreur

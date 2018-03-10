@@ -9,19 +9,19 @@ class ControleurRedaction {
   private $post;
   private $ctrlAdmin;
 
-  public function __construct() {
-    $this->post = new PostManager();
-    $this-> ctrlAdmin=new ControleurAdmin();
+  public function __construct(array $database) {
+    $this->post = new PostManager($database);
+    $this->ctrlAdmin = new ControleurAdmin($database);
     }
   //Affiche la page permettant de rédiger un post
-  public function redaction(int $idPost=null) {
-    if ($idPost!=null) {
-      $vue=new Vue("Redaction");
-      $vue->generer(array('post'=>$post));
-    }
-    else {
+  public function redaction(string $title=null, string $username=null, string $content=null, int $id=null) {
+    if (empty($id)) {
       $vue=new Vue("Redaction");
       $vue->generer(array());
+    }
+    else {
+      $vue = new Vue("Redaction");
+      $vue->generer(array('title'=>$title, 'username'=>$username, 'content'=>$content, 'id'=>$id));
     }
   }
 
@@ -40,11 +40,11 @@ class ControleurRedaction {
   // Affiche la page de redaction après clic sur le bouton modifier
   public function recup(int $idPost) {
     $post = $this->post->getPost($idPost);
-    $title=$this->$post['title'];
-    $content=$this->$post['content'];
-    $username=$this->$post['username'];
-    $id=$this->$post['id'];
-    $this->redaction($idPost);
+    $title=$post['title'];
+    $username=$post['username'];
+    $content=$post['content'];
+    $id=$post['id'];
+    $this->redaction($title, $username, $content, $id);
     }
 }
 ?>

@@ -7,8 +7,8 @@ require_once 'Vue/Vue.php';
 class ControleurAccueil {
   private $post;
 
-  public function __construct() {
-    $this->post = new PostManager();
+  public function __construct(array $database) {
+    $this->post = new PostManager($database);
     }
 
   // Affiche la liste de tous les posts du blog

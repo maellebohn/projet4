@@ -23,7 +23,7 @@
       <div class="pull-right">
         <p>Par <?= $comment['author'] ?> le <?= $comment['date_publication'] ?></p>
   	  </div>
-      <p><a id="signalement" href="<?= "index.php?action=signaler&id=".$comment['id'] ?>">Signaler ce commentaire</a></p>
+      <p><a id="signalement" href="<?= "index.php?action=signaler&id=".$comment['id']."&post=".$post['id'] ?>">Signaler ce commentaire</a></p>
   	</div>
     <hr>
   <?php endforeach; ?>
@@ -42,6 +42,9 @@
 
     <div class="form-group">
 			<input id="mail" class="form-control" name="email" type="text" placeholder="Votre email" required />
+      <?php if ($message==true) {
+        echo '<div class="error">Cette adresse email n\'est pas valide</div>';
+      } ?>
 		</div>
 
 		<div class="form-group">

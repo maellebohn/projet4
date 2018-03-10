@@ -9,9 +9,9 @@ class ControleurAdmin {
   private $post;
   private $comment;
 
-  public function __construct() {
-    $this->post = new PostManager();
-    $this->comment = new CommentManager();
+  public function __construct(array $database) {
+    $this->post = new PostManager($database);
+    $this->comment = new CommentManager($database);
   }
 
   public function administration() {
