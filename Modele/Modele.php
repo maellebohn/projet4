@@ -106,7 +106,7 @@ function modifyPassword($newpassword, $username) {
 // Effectue la connexion à la BDD
 // Instancie et renvoie l'objet PDO associé
 function getBdd() {
-  return $bdd = new PDO('mysql:host=localhost;dbname=projet4;charset=utf8', 'jean','Louise@13', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+  return $bdd = new PDO('mysql:host=;dbname=;charset=utf8', '','', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
   // ,PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC)
   // return $bdd;
 }
